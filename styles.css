@@ -1,0 +1,13 @@
+.board-grid {
+    border: 1px solid red;
+    height: 100px;
+    width: 100px;
+
+}
+
+.game-board {
+    display: flex;
+    width: 306px;
+    height: 306px;
+    flex-wrap: wrap;
+}
