@@ -3,23 +3,71 @@ const GameBoard = {
 }
 
 const Players = function (token){
-    const placeToken = function (){
-        const spaces = document.querySelectorAll('.board-grid');
+    const placeToken = function (event){
         for(let i = 0; i < GameBoard.gameBoard.length; i++) {
-            spaces[i].addEventListener('click', (e)=> {    
+            // spaces[i].addEventListener('click', (e)=> {    
                 //push token into array relative to the index of board
-                GameBoard.gameBoard.splice(Array.prototype.indexOf.call(spaces, e.target), 1, this.token)
+                GameBoard.gameBoard.splice(Array.prototype.indexOf.call(spaces, event.target), 1, this.token)
                 //display array relative to the index of board
                 spaces[i].textContent = GameBoard.gameBoard[i]
-            })
+            // })
         }
     }
     return {token, placeToken}
 }
 
-const playerTwo = Players("O")
-playerTwo.placeToken()
+const playerOne = Players("X");
+playerOne.isActive = true
 
-const playerOne = Players("X")
-playerOne.placeToken()
+const playerTwo = Players("O");
 
+const Game = (function (){  
+    
+    //place tokens
+    const placeToken = ()=> {
+        if (playerOne.isActive) {
+            playerOne.placeToken(event) 
+        } else playerTwo.placeToken(event)
+    }
+
+    const changeTurn = () => {
+        if (playerOne.isActive) {
+            playerOne.isActive = false
+        } else playerOne.isActive = true
+    }
+        
+    return {placeToken, changeTurn}
+})()
+
+const spaces = document.querySelectorAll('.board-grid');
+spaces.forEach(space => space.addEventListener('click', ()=> {
+    Game.placeToken()
+    Game.changeTurn()
+    // checkForWinner.checkWin()
+    
+ }))
+
+// const checkForWinner = (function(){
+//      const winningCombination = [
+//          [0,1,2],
+//          [3,4,5],
+//          [6,7,8],
+//          [0,3,6],
+//          [1,4,7],
+//          [2,5,8],
+//          [0,4,8],
+//          [2,4,6]
+//      ]
+//      const checkWin = function (){
+//         winningCombination.forEach(winning => {
+//             if (winning.every(X))
+//             console.log("X win")
+//         })
+//      }
+
+//      const X = function (target){
+//          target == "X"
+//      }
+     
+//      return {checkWin}
+//  })()
