@@ -3,29 +3,27 @@ const GameBoard = function (){
     return {gameBoard}
 }
 
-const gameMechanic = GameBoard()
+const gameBoard = GameBoard() 
 
 const Players = function (token){
     const placeToken = function (event){
-        for(let i = 0; i < gameMechanic.gameBoard.length; i++) {    
+        for(let i = 0; i < gameBoard.gameBoard.length; i++) {
                 //push token into array relative to the index of board
-                gameMechanic.gameBoard.splice(Array.prototype.indexOf.call(spaces, event.target), 1, this.token)
+                gameBoard.gameBoard.splice(Array.prototype.indexOf.call(spaces, event.target), 1, this.token)
                 //display array relative to the index of board
-                spaces[i].textContent = gameMechanic.gameBoard[i]
-            // })
+                spaces[i].textContent = gameBoard.gameBoard[i]    
         }
     }
-    return {token, placeToken}
+    const isActive = function (){
+        return true
+    }
+    return {token, placeToken, isActive}
 }
 
 const playerOne = Players("X");
-playerOne.isActive = true
-
 const playerTwo = Players("O");
 
-const Game = (function (){  
-    
-    //place tokens
+const Game = function (){  
     const placeToken = ()=> {
         if (playerOne.isActive) {
             playerOne.placeToken(event) 
@@ -39,12 +37,17 @@ const Game = (function (){
     }
         
     return {placeToken, changeTurn}
-})()
+}
+
+const gameMechanic = Game ()
 
 const spaces = document.querySelectorAll('.board-grid');
-spaces.forEach(space => space.addEventListener('click', ()=> {
-    Game.placeToken()
-    Game.changeTurn()
+spaces.forEach(space => space.addEventListener('click', (e)=> {
+    if (e.target.textContent == "") {
+        gameMechanic.placeToken()
+        gameMechanic.changeTurn()
+    }
+    
     // checkForWinner.checkWin()
     
  }))
