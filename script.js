@@ -1,15 +1,17 @@
-const GameBoard = {
-    gameBoard:  ["", "", "", "", "", "", "", "", ""]
+const GameBoard = function (){
+    const gameBoard = ["", "", "", "", "", "", "", "", ""]
+    return {gameBoard}
 }
+
+const gameMechanic = GameBoard()
 
 const Players = function (token){
     const placeToken = function (event){
-        for(let i = 0; i < GameBoard.gameBoard.length; i++) {
-            // spaces[i].addEventListener('click', (e)=> {    
+        for(let i = 0; i < gameMechanic.gameBoard.length; i++) {    
                 //push token into array relative to the index of board
-                GameBoard.gameBoard.splice(Array.prototype.indexOf.call(spaces, event.target), 1, this.token)
+                gameMechanic.gameBoard.splice(Array.prototype.indexOf.call(spaces, event.target), 1, this.token)
                 //display array relative to the index of board
-                spaces[i].textContent = GameBoard.gameBoard[i]
+                spaces[i].textContent = gameMechanic.gameBoard[i]
             // })
         }
     }
