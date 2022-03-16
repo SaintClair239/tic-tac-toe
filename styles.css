@@ -1,13 +1,44 @@
-.board-grid {
-    border: 1px solid red;
-    height: 100px;
-    width: 100px;
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400&display=swap');
 
+:root {
+    --grid-clr: #C10468;
+    --token-clr: #FEC6EC;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Exo 2', sans-serif;
+    background-color: black;
+}
+
+.container {    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    min-width:7.2rem ;
+}
+
+.title {
+    font-size: 7.1875rem;
+    color: #FFF;
+    font-weight: 300;
+}
+.board-grid {
+    border: 2.5px solid var(--grid-clr);
+    width: 10rem;
+    height: 10rem;
+    color: white;
+    font-size: 7rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .game-board {
-    display: flex;
-    width: 306px;
-    height: 306px;
-    flex-wrap: wrap;
+   display: grid;
+   grid-template-columns: 1fr 1fr 1fr;
 }
