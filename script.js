@@ -72,6 +72,22 @@ spaces.forEach(space => space.addEventListener('click', (e)=> {
 
     playerOne.checkWin()
     playerTwo.checkWin()
-    console.log(playerOne.hasWon)
-    console.log(playerTwo.hasWon)
+    test.displayWin()
  }))
+
+ const DisplayWin = function (){
+     const win = document.querySelector('h2');
+     const displayWin = function (){
+        if (playerOne.hasWon) {
+            win.textContent = "Player One has won!"
+        } else if (playerTwo.hasWon) {
+            win.textContent = "Player Two has won!"
+        } else if (!gameBoard.gameBoard.includes("") && playerOne.hasWon == false && playerTwo.hasWon == false) {
+            win.textContent = "Draw!"
+        }
+     }   
+
+     return {displayWin}
+ }
+
+ const test = DisplayWin()

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400&family=Hubballi&display=swap');
 
 :root {
     --grid-clr: #C10468;
@@ -8,7 +8,6 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Exo 2', sans-serif;
     background-color: black;
 }
 
@@ -22,16 +21,19 @@ body {
 }
 
 .title {
+    font-family: 'Exo 2', sans-serif;
     font-size: 7.1875rem;
     color: #FFF;
     font-weight: 300;
+    margin-bottom: 1rem;
 }
 .board-grid {
     border: 2.5px solid var(--grid-clr);
     width: 10rem;
     height: 10rem;
-    color: white;
-    font-size: 7rem;
+    color: var(--token-clr);
+    font-size: 10rem;
+    font-family: 'Hubballi', cursive;
 
     display: flex;
     justify-content: center;
@@ -41,4 +43,11 @@ body {
 .game-board {
    display: grid;
    grid-template-columns: 1fr 1fr 1fr;
+}
+
+h2 {
+    color: var(--token-clr);
+    margin: 2rem 0;
+    font-size: 2.3rem;
+    font-family: 'Exo 2', sans-serif;
 }
