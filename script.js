@@ -1,19 +1,11 @@
-const GameBoard = function (){
-    const gameBoard = ["", "", "", "", "", "", "", "", ""]
-    return {gameBoard}
-}
-
-const gameBoard = GameBoard() 
-
 const Players = function (token, hasWon){
     const placeToken = function (event){
-        for(let i = 0; i < gameBoard.gameBoard.length; i++) {
-            //push token into array relative to the index of board
-            gameBoard.gameBoard.splice(Array.prototype.indexOf.call(spaces, event.target), 1, this.token)
-            //display array relative to the index of board
-            spaces[i].textContent = gameBoard.gameBoard[i]    
+        for(let i = 0; i < gameMechanic.board.length; i++) {
+            gameMechanic.board.splice(Array.prototype.indexOf.call(spaces, event.target), 1, this.token)
+            spaces[i].textContent = gameMechanic.board[i]    
         }
     }
+
     const isActive = function (){
         return true
     }
@@ -31,11 +23,9 @@ const Players = function (token, hasWon){
     
     const checkWin = function (){
         winningCombination.forEach(winning => {
-            if (gameBoard.gameBoard[winning[0]] == this.token && gameBoard.gameBoard[winning[1]] == this.token && gameBoard.gameBoard[winning[2]] == this.token) {
-                console.log(this.token)
+            if (gameMechanic.board[winning[0]] == this.token && gameMechanic.board[winning[1]] == this.token && gameMechanic.board[winning[2]] == this.token) {
                 this.hasWon =  true
-            }   
-                
+            }            
         })
     }
 
@@ -45,7 +35,9 @@ const Players = function (token, hasWon){
 const playerOne = Players("X", false);
 const playerTwo = Players("O", false);
 
-const Game = function (){  
+const Game = function (){
+    const board = ["", "", "", "", "", "", "", "", ""]
+
     const placeToken = ()=> {
         if (playerOne.isActive) {
             playerOne.placeToken(event) 
@@ -58,10 +50,25 @@ const Game = function (){
         } else playerOne.isActive = true
     }
         
-    return {placeToken, changeTurn}
+    return {placeToken, changeTurn, board}
 }
 
 const gameMechanic = Game ()
+
+const DisplayWin = (function (){
+    const win = document.querySelector('h2');
+    const displayWin = function (){
+       if (playerOne.hasWon) {
+           win.textContent = "Player One has won!"
+       } else if (playerTwo.hasWon) {
+           win.textContent = "Player Two has won!"
+       } else if (!gameMechanic.board.includes("") && playerOne.hasWon == false && playerTwo.hasWon == false) {
+           win.textContent = "Draw!"
+       }
+    }   
+
+    return {displayWin}
+})()
 
 const spaces = document.querySelectorAll('.board-grid');
 spaces.forEach(space => space.addEventListener('click', (e)=> {
@@ -72,22 +79,5 @@ spaces.forEach(space => space.addEventListener('click', (e)=> {
 
     playerOne.checkWin()
     playerTwo.checkWin()
-    test.displayWin()
+    DisplayWin.displayWin()
  }))
-
- const DisplayWin = function (){
-     const win = document.querySelector('h2');
-     const displayWin = function (){
-        if (playerOne.hasWon) {
-            win.textContent = "Player One has won!"
-        } else if (playerTwo.hasWon) {
-            win.textContent = "Player Two has won!"
-        } else if (!gameBoard.gameBoard.includes("") && playerOne.hasWon == false && playerTwo.hasWon == false) {
-            win.textContent = "Draw!"
-        }
-     }   
-
-     return {displayWin}
- }
-
- const test = DisplayWin()
